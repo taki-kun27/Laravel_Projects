@@ -21,4 +21,34 @@ class AuthController extends Controller
                 return redirect('/products');
             }
     }
+
+    public function authenticateUsers(Request $request) : RedirectResponse
+    {
+            $credentials = $request->validate([
+                'username' => ['required', 'email'],
+                'password' => ['required', 'alpha_num'],
+            ]);
+
+            if(Auth::attempt($credentials)){
+                $request->session()->regenerate();
+                return redirect()->intended('index');
+            }
+            return back()->withErrors([
+                'username' => 'The provided credentials do not match our records.'
+            ])->onlyInput('username');
+
+           
+    }
+
+    public function logout(Request $request): RedirectResponse
+    {
+        Auth::logout();
+    
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+    
+        return redirect()->route('auth.view'); 
+    }
+    
+
 }
