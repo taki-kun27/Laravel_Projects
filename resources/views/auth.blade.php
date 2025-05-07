@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
     <title>Login</title>
 </head>
 <body>
@@ -12,14 +13,14 @@
 
             <label for="username">
                 Username:
-                <input type="text" name="username" id="username" placeholder="Enter Username" required>
+                <input type="text" name="username" id="username" placeholder="Username" required>
             </label>
 
             <br>
 
             <label for="password">
                 Password:
-                <input type="password" name="password" id="password" placeholder="Enter Password" required>
+                <input type="password" name="password" id="password" placeholder="Password" required>
             </label>    
 
             <br>
@@ -28,5 +29,7 @@
             <button type="reset">Reset</button>
         </form>
     </div>
+
+    <script src="{{ asset('js/scripts.js') }}"></script>
 </body>
 </html>

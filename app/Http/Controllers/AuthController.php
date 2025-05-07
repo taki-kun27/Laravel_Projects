@@ -25,19 +25,23 @@ class AuthController extends Controller
     public function authenticateUsers(Request $request) : RedirectResponse
     {
             $credentials = $request->validate([
-                'username' => ['required', 'email'],
+                'username' => ['required','alpha_num'],
                 'password' => ['required', 'alpha_num'],
             ]);
 
-            if(Auth::attempt($credentials)){
+            $credentials = [
+                'username' => $request->username,
+                'password' => $request->password,
+            ];
+
+            if (Auth::attempt($credentials)) {
                 $request->session()->regenerate();
                 return redirect()->intended('index');
             }
+
             return back()->withErrors([
                 'username' => 'The provided credentials do not match our records.'
             ])->onlyInput('username');
-
-           
     }
 
     public function logout(Request $request): RedirectResponse
@@ -46,7 +50,6 @@ class AuthController extends Controller
     
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-    
         return redirect()->route('auth.view'); 
     }
     

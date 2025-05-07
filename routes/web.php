@@ -9,7 +9,7 @@ Route::get('/', function () {
 });
 Route::resource('products', ProductController::class);
 
-Route::get('/dashboard',[DashboardController::class])->name('app');
+Route::get('/dashboard',[DashboardController::class, 'index'])->name('app');
 
 Route::get('/auth',[AuthController::class, 'viewAuth'])->name('auth.view');
 Route::post('/auth', [AuthController::class, 'authenticateUsers'])->name('auth.login');
