@@ -18,3 +18,6 @@ Route::get('/products', [ProductController::class, 'index']);
 
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
+
+Route::get('/create', [ProductController::class, 'create'])->name('products.create');
+

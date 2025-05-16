@@ -8,8 +8,7 @@
  Add New Product
  </div>
  <div class="float-end">
- <a href="{{ route('products.index') }}" class="btn 
-btn-primary btn-sm">&larr; Back</a>
+ <a href="{{ route('products.index') }}" class="btn btn-primary btn-sm">&larr; Back</a>
  </div>
  </div>
  <div class="card-body">
@@ -43,12 +42,10 @@ old('name') }}">
  <div class="mb-3 row">
  <label for="quantity" class="col-md-4 colform-label text-md-end text-start">Quantity</label>
  <div class="col-md-6">
- <input type="number" class="form-control 
-@error('quantity') is-invalid @enderror" id="quantity" name="quantity"
+ <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity"
 value="{{ old('quantity') }}">
  @error('quantity')
- <span class="text-danger">{{ $message 
-}}</span>
+ <span class="text-danger">{{ $message }}</span>
  @enderror
  </div>
  </div>
@@ -67,12 +64,9 @@ name="price" value="{{ old('price') }}">
  <div class="mb-3 row">
  <label for="description" class="col-md-4 colform-label text-md-end text-start">Description</label>
  <div class="col-md-6">
- <textarea class="form-control 
-@error('description') is-invalid @enderror" id="description"
-name="description">{{ old('description') }}</textarea>
+ <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ old('description') }}</textarea>
  @error('description')
- <span class="text-danger">{{ $message 
-}}</span>
+ <span class="text-danger">{{ $message }}</span>
  @enderror
  </div>
  </div>
