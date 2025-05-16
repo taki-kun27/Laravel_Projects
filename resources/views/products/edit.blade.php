@@ -17,9 +17,12 @@
 btn-primary btn-sm">&larr; Back</a>
  </div>
  </div>
- <div class="card-body">
- <form action="{{ route('products.update', $product-
->id) }}" method="post">
+
+
+ <div class="row">
+    <div class="column">
+    <div class="card-body">
+ <form action="{{ route('products.update', $product->id) }}" method="post">
  @csrf
 @method("PUT")
  <div class="mb-3 row">
@@ -78,14 +81,27 @@ name="price" value="{{ $product->price }}">
 name="description">{{ $product->description }}</textarea>
  @error('description')
  <span class="text-danger">{{ $message 
-}}</span>
+}}</span>   
  @enderror
  </div>
  </div>
+
+
+
 <div class="mb-3 row">
  <input type="submit" class="col-md-3 offsetmd-5 btn btn-primary" value="Update">
  </div>
  </form>
+    </div>
+
+    <div class="column">
+    <img src="{{ route('upload.file') }}">
+    </div>
+
+ </div>
+
+
+
  </div>
  </div>
  </div> 

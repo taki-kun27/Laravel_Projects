@@ -3,21 +3,25 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\FileUploadController;
 
 Route::get('/', function () {
     return view('auth');
 });
 Route::resource('products', ProductController::class);
 
-Route::get('/dashboard',[DashboardController::class, 'index'])->name('app');
+Route::get('/dashboard',[ProductController::class, 'index'])->name('app');
 
 Route::get('/auth',[AuthController::class, 'viewAuth'])->name('auth.view');
 Route::post('/auth', [AuthController::class, 'authenticateUsers'])->name('auth.login');
 
-Route::get('/products', [ProductController::class, 'index']);
-
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
-Route::get('/create', [ProductController::class, 'create'])->name('products.create');
+//Upload File Routes
 
+Route::get('/upload', function () {
+    return view('upload');
+});
+
+Route::post('/upload', [FileUploadController::class, 'storeFile'])->name('upload.file');

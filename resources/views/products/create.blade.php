@@ -68,6 +68,16 @@ name="price" value="{{ old('price') }}">
  @error('description')
  <span class="text-danger">{{ $message }}</span>
  @enderror
+
+
+<div class="col-md-6">
+    <form action="" method="post">
+        <label for="file">Select File: </label>
+        <input type="file" name="file" id="file">
+        <button type="submit">Upload File</button>
+    </form>
+</div>
+
  </div>
  </div>
 <div class="mb-3 row">
