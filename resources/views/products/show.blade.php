@@ -49,6 +49,18 @@ btn-primary btn-sm">&larr; Back</a>
  </div>
  </div>
  
+ <div class="row mt-4">
+  <label class="col-md-4 col-form-label text-md-end text-start"><strong>Image:</strong></label>
+  <div class="col-md-6">
+    @if($product->image_path)
+      <img src="{{ asset('storage/' . $product->image_path) }}" alt="Product Image" class="img-fluid rounded shadow" style="max-width: 250px;">
+    @else
+      <p>No image uploaded.</p>
+    @endif
+  </div>
+</div>
+
+
  </div>
  </div>
  </div> 

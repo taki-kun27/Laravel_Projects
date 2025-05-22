@@ -21,12 +21,12 @@ class UpdateProductRequest extends FormRequest
  public function rules(): array
  {
  return [
- 'code' => 
-'required|string|max:50|unique:products,code,'.$this->product->id,
+'code' => 'required|string|max:50|unique:products,code,' . $this->route('product'),
  'name' => 'required|string|max:250',
  'quantity' => 'required|integer|min:1|max:10000',
  'price' => 'required',
- 'description' => 'nullable|string'
+ 'description' => 'nullable|string',
+ 'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
  ];
  }
 }

@@ -31,6 +31,17 @@ class ProductController extends Controller
 RedirectResponse
  {
  Product::create($request->validated());
+
+
+$data = $request->validated();
+
+if($request->hasFile('image')){
+    $path = $request->file('image')->store('products', 'public');
+    $data['image'] = $path;
+}
+
+Product::create('$data');
+
  return redirect()->route('products.index')
  ->withSuccess('New product is added successfully.');
  }
@@ -51,13 +62,24 @@ RedirectResponse
  /**
  * Update the specified resource in storage.
  */
- public function update(UpdateProductRequest $request, Product
-$product) : RedirectResponse
- {
- $product->update($request->validated());
- return redirect()->back()
- ->withSuccess('Product is updated successfully.');
- }
+public function update(UpdateProductRequest $request, Product $product) : RedirectResponse
+{
+    $data = $request->validated();
+
+    if ($product->image_path && \Storage::disk('public')->exists($product->image_path)) {
+        \Storage::disk('public')->delete($product->image_path);
+    }
+
+    if ($request->hasFile('image')) {
+        $data['image_path'] = $request->file('image')->store('uploads', 'public');
+    }
+
+
+    $product->update($data);
+
+    return redirect()->back()->withSuccess('Product is updated successfully.');
+}
+
  /**
  * Remove the specified resource from storage.
  */

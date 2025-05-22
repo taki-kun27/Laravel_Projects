@@ -7,18 +7,19 @@ use Illuminate\Support\Facades\Storage;
 
 class FileUploadController extends Controller
 {
-    public function showFileUpload(){
-
+    public function showFileUpload()
+    {
+        return view('create');
     }
 
-    public function storeFile(){
-
+    public function storeFile(Request $request) {
         $request->validate([
             'file' => 'required|file|max:2048'
         ]);
 
-            $filePath = $request->file('file')->store('uploads', 'public');
 
-            return back()->with('success', 'File uploaded to: ', $filePath);
+        $filePath = $request->file('file')->store('uploads', 'public');
+
+        return back()->with('success', 'File uploaded to: ' . $filePath);
     }
 }

@@ -20,8 +20,5 @@ Route::post('/logout', [AuthController::class, 'logout'])->name('auth.logout');
 
 //Upload File Routes
 
-Route::get('/upload', function () {
-    return view('upload');
-});
-
+Route::get('/upload', [FileUploadController::class, 'showFileUpload'])->name('upload.create');
 Route::post('/upload', [FileUploadController::class, 'storeFile'])->name('upload.file');

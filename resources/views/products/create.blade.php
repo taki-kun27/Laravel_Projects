@@ -70,13 +70,16 @@ name="price" value="{{ old('price') }}">
  @enderror
 
 
-<div class="col-md-6">
-    <form action="" method="post">
-        <label for="file">Select File: </label>
-        <input type="file" name="file" id="file">
-        <button type="submit">Upload File</button>
-    </form>
+ <div class="mb-3 row">
+    <label for="image" class="col-md-4 col-form-label text-md-end text-start">Select File: </label>
+    <div class="col-md-6">
+        <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+        @error('image')
+            <span class="text-danger">{{ $message }}</span>
+        @enderror
+    </div>
 </div>
+
 
  </div>
  </div>
