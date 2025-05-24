@@ -27,23 +27,19 @@ class ProductController extends Controller
  /**
  * Store a newly created resource in storage.
  */
- public function store(StoreProductRequest $request) : 
-RedirectResponse
+ public function store(StoreProductRequest $request) : RedirectResponse
  {
- Product::create($request->validated());
+    $data = $request->validated();
 
+    if($request->hasFile('image')){
+        $path = $request->file('image')->store('products', 'public');
+        $data['image'] = $path;
+    }
 
-$data = $request->validated();
+    Product::create($data);
 
-if($request->hasFile('image')){
-    $path = $request->file('image')->store('products', 'public');
-    $data['image'] = $path;
-}
-
-Product::create('$data');
-
- return redirect()->route('products.index')
- ->withSuccess('New product is added successfully.');
+    return redirect()->route('products.index')
+        ->withSuccess('New product is added successfully.');
  }
  /**
  * Display the specified resource.
@@ -66,14 +62,15 @@ public function update(UpdateProductRequest $request, Product $product) : Redire
 {
     $data = $request->validated();
 
-    if ($product->image_path && \Storage::disk('public')->exists($product->image_path)) {
-        \Storage::disk('public')->delete($product->image_path);
-    }
-
     if ($request->hasFile('image')) {
-        $data['image_path'] = $request->file('image')->store('uploads', 'public');
+        // Delete old image if exists
+        if ($product->image && \Storage::disk('public')->exists($product->image)) {
+            \Storage::disk('public')->delete($product->image);
+        }
+        
+        // Store new image
+        $data['image'] = $request->file('image')->store('products', 'public');
     }
-
 
     $product->update($data);
 

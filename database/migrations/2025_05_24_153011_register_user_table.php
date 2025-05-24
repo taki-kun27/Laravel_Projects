@@ -11,9 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('fileupload', function (Blueprint $table) {
+        Schema::create('register_user', function (Blueprint $table) {
             $table->id();
-            $table->string('image_path')->nullable();
+            $table->string('username')->unique();
+            $table->string('password', 255);
+            $table->rememberToken();
             $table->timestamps();
         });
     }
@@ -23,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('fileupload');
+        Schema::dropIfExists('register_user');
     }
 };

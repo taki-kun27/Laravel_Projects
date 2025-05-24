@@ -8,7 +8,13 @@
  </div>
  @endsession
  <div class="card">
- <div class="card-header">Product List</div>
+ <div class="card-header">Product List
+
+<p>
+  Logged in as:
+  {{ Auth::check() ? Auth::user()->username : 'Guest' }}
+</p>
+ </div>
  <div class="card-body">
  <a href="{{ route('products.create') }}" class="btn btn-success btn-sm my-2">
     <i class="bi bi-plus-circle"></i> Add New Product</a>

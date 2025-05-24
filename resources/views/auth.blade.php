@@ -11,6 +11,20 @@
         <form action="{{ route('auth.login') }}" method="POST">
             @csrf
 
+
+            <h1>Login to Your Account</h1>
+
+            @if($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+
             <label for="username">
                 Username:
                 <input type="text" name="username" id="username" placeholder="Username" required>
@@ -27,6 +41,8 @@
 
             <button type="submit">Submit</button>
             <button type="reset">Reset</button>
+
+            <p>Don't have an account? <a href="{{ route('auth.register') }}">Register</a></p>
         </form>
     </div>
 
